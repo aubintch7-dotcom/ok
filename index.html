@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="uk" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Швидке Фінансування — Онлайн-кредити в Канаді</title>
+<meta name="description" content="Онлайн-кредити до 100 000 000 ₴ на банківський рахунок за 5 хвилин. Ставка 3% річних. Головний офіс у Канаді.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%234f8cff'/><text y='72' x='50' font-size='58' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>₴</text></svg>">
+<link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+<div id="prog"></div>
+<div class="bgwrap"><div class="bgimg"></div><div class="bgtint"></div><div class="bgveil"></div></div>
+<canvas id="bg"></canvas><div class="spot" id="spot"></div><div class="grain"></div>
+
+<header>
+ <div class="wrap nav">
+  <div class="logo"><i>₴</i><span data-i18n="brand">Швидке Фінансування</span></div>
+  <div class="links">
+    <a href="#calc" data-i18n="nav2">Калькулятор</a><a href="#how" data-i18n="nav1">Як це працює</a>
+    <a href="#rates" data-i18n="nav6">Тарифи</a><a href="#rev" data-i18n="nav5">Відгуки</a><a href="#faq" data-i18n="nav3">Питання</a>
+  </div>
+  <div class="tools">
+    <button class="ico-btn" id="tgl" onclick="toggleTheme()">🌙</button>
+    <div class="lang"><button id="uk" class="on" onclick="setLang('uk')">UA</button><button id="en" onclick="setLang('en')">EN</button></div>
+    <a class="btn sm" href="#form" data-i18n="nav4">Запросити кредит</a>
+    <button class="ico-btn" id="burger" onclick="mm()">☰</button>
+  </div>
+ </div>
+ <div id="mmenu">
+   <a href="#calc" onclick="mm()" data-i18n="nav2">Калькулятор</a><a href="#how" onclick="mm()" data-i18n="nav1">Як це працює</a>
+   <a href="#rates" onclick="mm()" data-i18n="nav6">Тарифи</a><a href="#rev" onclick="mm()" data-i18n="nav5">Відгуки</a>
+   <a href="#faq" onclick="mm()" data-i18n="nav3">Питання</a><a href="#form" onclick="mm()" data-i18n="nav4">Запросити кредит</a>
+ </div>
+</header>
+
+<!-- HERO -->
+<section class="wrap hero">
+  <div>
+    <span class="eyebrow"><span class="dot"></span><span data-i18n="eyebrow">Головний офіс у Канаді · Закон PIPEDA</span></span>
+    <h1><span data-i18n="h1a">Кредит до</span> <span class="grad" style="white-space:nowrap">100 000 000 ₴</span><br><span data-i18n="h1b">на рахунок за 5 хвилин</span></h1>
+    <p class="lead" data-i18n="sub">Без довідок, без поручителів, без візиту до офісу. Автоматичне рішення та переказ на рахунок будь-якого канадського банку — цілодобово, 7 днів на тиждень.</p>
+    <p style="margin-top:30px;display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn" href="#form"><span data-i18n="cta">Запросити кредит</span> →</a>
+      <a class="btn ghost" href="#calc" data-i18n="cta2">Розрахувати платіж</a></p>
+    <div class="grid4" style="margin-top:48px">
+      <div class="stat"><b class="grad"><span class="cnt" data-to="5">0</span> <span data-i18n="min">хв</span></b><span data-i18n="s1">термін схвалення</span></div>
+      <div class="stat"><b class="grad"><span class="cnt" data-to="98">0</span>%</b><span data-i18n="s2">схвалень</span></div>
+      <div class="stat"><b class="grad"><span class="cnt" data-to="640">0</span>K</b><span data-i18n="s3">клієнтів</span></div>
+      <div class="stat"><b class="gold">24/7</b><span data-i18n="s4">онлайн-підтримка</span></div>
+    </div>
+  </div>
+
+  <div class="card" id="calc">
+    <h3 data-i18n="calc">Кредитний калькулятор</h3>
+    <label data-i18n="amount">Сума кредиту</label>
+    <input type="range" id="amt" min="5000" max="100000000" step="5000" value="1000000" oninput="calc()">
+    <div class="rv"><span>5 000 ₴</span><b id="amtv">1 000 000 ₴</b><span>100 000 000 ₴</span></div>
+    <div class="chips">
+      <span class="chip" onclick="setAmt(100000)">100 000 ₴</span><span class="chip" onclick="setAmt(1000000)">1 000 000 ₴</span>
+      <span class="chip" onclick="setAmt(10000000)">10 000 000 ₴</span><span class="chip" onclick="setAmt(50000000)">50 000 000 ₴</span>
+    </div>
+    <label data-i18n="term">Строк погашення</label>
+    <input type="range" id="trm" min="3" max="60" step="1" value="12" oninput="calc()">
+    <div class="rv"><span>3 <span data-i18n="mo">міс.</span></span><b><span id="trmv">12</span> <span data-i18n="mo">міс.</span></b><span>60 <span data-i18n="mo">міс.</span></span></div>
+    <div class="calc-out">
+      <div class="big"><span data-i18n="mp">Щомісячний платіж</span><b id="mp">—</b></div>
+      <div><span data-i18n="rate">Ставка</span><b id="rt">3%</b></div>
+      <div><span data-i18n="over">Переплата</span><b id="ovr">—</b></div>
+      <div><span data-i18n="total">Разом до повернення</span><b id="tt">—</b></div>
+    </div>
+    <p style="margin:18px 0 0"><a class="btn" href="#form" style="width:100%;justify-content:center" data-i18n="apply">Запросити кредит на цих умовах</a></p>
+  </div>
+</section>
+
+<div class="ticker"><div class="tick-in" id="tick"></div></div>
+
+<!-- AVANTAGES -->
+<section class="wrap reveal">
+  <span class="eyebrow"><span class="dot"></span><span data-i18n="advE">Переваги</span></span>
+  <h2 data-i18n="advt">Чому обирають нас</h2>
+  <div class="grid3" style="margin-top:32px">
+    <div class="card hov"><div class="ico">⚡</div><h3 data-i18n="a1">Миттєве рішення</h3><p class="lead" data-i18n="a1d">Автоматичний скоринг перевіряє заявку за 5 хвилин — без дзвінків і очікування.</p></div>
+    <div class="card hov"><div class="ico">🔒</div><h3 data-i18n="a2">Безпека даних</h3><p class="lead" data-i18n="a2d">Шифрування SSL/TLS і повна відповідність канадському закону PIPEDA.</p></div>
+    <div class="card hov"><div class="ico">📉</div><h3 data-i18n="a3">Чесна ставка</h3><p class="lead" data-i18n="a3d">Лише 3% річних. Без прихованих комісій, нав'язаних страховок і штрафів.</p></div>
+    <div class="card hov"><div class="ico">🏦</div><h3 data-i18n="a4">Будь-який банк</h3><p class="lead" data-i18n="a4d">Переказ на рахунок RBC, TD, Scotiabank, BMO, CIBC, Desjardins та інших.</p></div>
+    <div class="card hov"><div class="ico">🕐</div><h3 data-i18n="a5">Дострокове погашення</h3><p class="lead" data-i18n="a5d">Закривайте кредит будь-якого дня без перерахунку відсотків і комісій.</p></div>
+    <div class="card hov"><div class="ico">🤝</div><h3 data-i18n="a6">Будь-яка історія</h3><p class="lead" data-i18n="a6d">Розглядаємо заявки клієнтів із простроченнями та низьким кредитним рейтингом.</p></div>
+  </div>
+</section>
+
+<!-- PARALLAX -->
+<div class="para" id="para"><div class="pimg"></div><div class="wrap">
+  <span class="eyebrow"><span class="dot"></span><span data-i18n="howE">Процес</span></span>
+  <h2 id="how" data-i18n="howt">Три кроки до грошей на рахунку</h2>
+  <div class="grid3" style="margin-top:36px">
+    <div class="step"><b class="n">1</b><h3 data-i18n="st1">Заповніть заявку</h3><p class="lead" data-i18n="st1d">Онлайн-анкета займає 2 хвилини. Потрібне лише посвідчення особи.</p></div>
+    <div class="step"><b class="n">2</b><h3 data-i18n="st2">Отримайте рішення</h3><p class="lead" data-i18n="st2d">Скоринг працює автоматично, відповідь надходить за 5 хвилин.</p></div>
+    <div class="step"><b class="n">3</b><h3 data-i18n="st3">Заберіть гроші</h3><p class="lead" data-i18n="st3d">Переказ Interac або на банківський рахунок протягом 15 хвилин.</p></div>
+  </div>
+</div></div>
+
+<!-- TARIFS -->
+<section class="wrap reveal" id="rates">
+  <span class="eyebrow"><span class="dot"></span><span data-i18n="rE">Тарифи</span></span>
+  <h2 data-i18n="rt2">Прозорі умови</h2>
+  <p class="lead" data-i18n="rs">Єдина ставка 3% річних для всіх програм. Жодних прихованих платежів.</p>
+  <div class="card tbl-scroll" style="margin-top:28px;padding:8px 8px 0">
+    <table><thead><tr>
+      <th data-i18n="th1">Програма</th><th data-i18n="th2">Сума</th><th data-i18n="th3">Строк</th><th data-i18n="th4">Ставка</th><th data-i18n="th5">Рішення</th>
+    </tr></thead><tbody>
+      <tr><td><b data-i18n="pr1">Експрес</b></td><td>5 000 – 500 000 ₴</td><td>3–12 <span data-i18n="mo">міс.</span></td><td><b>3%</b></td><td>5 <span data-i18n="min">хв</span></td></tr>
+      <tr><td><b data-i18n="pr2">Стандарт</b></td><td>500 000 – 5 000 000 ₴</td><td>6–36 <span data-i18n="mo">міс.</span></td><td><b>3%</b></td><td>15 <span data-i18n="min">хв</span></td></tr>
+      <tr><td><b data-i18n="pr3">Преміум</b></td><td>5 000 000 – 50 000 000 ₴</td><td>12–60 <span data-i18n="mo">міс.</span></td><td><b>3%</b></td><td>30 <span data-i18n="min">хв</span></td></tr>
+      <tr><td><b data-i18n="pr4">Рефінансування</b></td><td>100 000 – 100 000 000 ₴</td><td>6–60 <span data-i18n="mo">міс.</span></td><td><b>3%</b></td><td>30 <span data-i18n="min">хв</span></td></tr>
+    </tbody></table>
+  </div>
+</section>
+
+<!-- FORMULAIRE -->
+<section class="wrap reveal" id="form">
+  <div class="grid2" style="gap:40px;align-items:start">
+    <div>
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="ftE">Заявка</span></span>
+      <h2 data-i18n="ft">Оформіть кредит онлайн</h2>
+      <p class="lead" data-i18n="fs">Заповніть три короткі кроки — менеджер зв'яжеться з вами протягом 15 хвилин. Заявка не впливає на кредитну історію.</p>
+      <div class="card" style="margin-top:26px;padding:22px">
+        <div class="summary">
+          <span data-i18n="sum1">Сума</span><b id="sA">—</b><br>
+          <span data-i18n="sum2">Строк</span><b id="sT">—</b><br>
+          <span data-i18n="sum3">Платіж на місяць</span><b id="sM">—</b><br>
+          <span data-i18n="sum4">Ставка</span><b>3%</b>
+        </div>
+      </div>
+      <p class="lead" style="margin-top:18px;font-size:14px" data-i18n="secure">🔒 Дані передаються захищеним каналом і не передаються третім особам.</p>
+    </div>
+
+    <div class="card">
+      <div class="wiz"><div id="w1" class="done"><i></i></div><div id="w2"><i></i></div><div id="w3"><i></i></div></div>
+      <div class="wiz-lbl"><span data-i18n="stepw">Крок</span> <span id="sN">1</span>/3 — <span id="sTtl">Контактні дані</span></div>
+      <form id="loanForm" novalidate>
+        <input type="hidden" name="access_key" id="ak">
+        <input type="hidden" name="subject" value="Нова заявка на кредит — Швидке Фінансування">
+        <input type="hidden" name="from_name" value="Швидке Фінансування">
+        <input type="hidden" name="Щомісячний_платіж" id="hMp">
+        <input type="checkbox" name="botcheck" style="display:none">
+
+        <div class="pane on" data-p="1">
+          <label data-i18n="fio">Повне ім'я *</label>
+          <input name="Ім'я" id="f_fio" placeholder="Іван Петренко"><div class="err" data-e="fio"></div>
+          <div class="row">
+            <div><label data-i18n="phone">Телефон (з кодом країни) *</label><input name="Телефон" id="f_tel" inputmode="tel" placeholder="+380 67 123 45 67"><div class="err" data-e="tel"></div></div>
+            <div><label data-i18n="email">Email *</label><input name="Email" id="f_mail" type="email" placeholder="mail@example.ca"><div class="err" data-e="mail"></div></div>
+          </div>
+          <p style="margin-top:22px"><button type="button" class="btn" onclick="go(2)"><span data-i18n="next">Далі</span> →</button></p>
+        </div>
+
+        <div class="pane" data-p="2">
+          <div class="row">
+            <div><label data-i18n="famount">Сума, ₴ *</label><input name="Сума" id="f_amt" type="number" min="5000" max="100000000" value="1000000"><div class="err" data-e="amt"></div></div>
+            <div><label data-i18n="fterm">Строк, місяців *</label><input name="Строк" id="f_trm" type="number" min="3" max="60" value="12"><div class="err" data-e="trm"></div></div>
+          </div>
+          <label data-i18n="purpose">Мета кредиту</label>
+          <select name="Мета"><option data-i18n="p1">Особисті потреби</option><option data-i18n="p2">Ремонт житла</option><option data-i18n="p3">Авто</option>
+            <option data-i18n="p4">Рефінансування</option><option data-i18n="p5">Бізнес</option><option data-i18n="p6">Інше</option></select>
+          <p style="margin-top:22px;display:flex;gap:10px">
+            <button type="button" class="btn ghost" onclick="go(1)">←</button>
+            <button type="button" class="btn" onclick="go(3)"><span data-i18n="next">Далі</span> →</button></p>
+        </div>
+
+        <div class="pane" data-p="3">
+          <div class="row">
+            <div><label data-i18n="emp">Зайнятість</label>
+              <select name="Зайнятість"><option data-i18n="e1">Найманий працівник</option><option data-i18n="e2">Самозайнятий / підприємець</option>
+              <option data-i18n="e3">Пенсіонер</option><option data-i18n="e4">Інше</option></select></div>
+            <div><label data-i18n="inc">Дохід на місяць, ₴ *</label><input name="Дохід" id="f_inc" type="number" placeholder="6000"><div class="err" data-e="inc"></div></div>
+          </div>
+          <div class="row">
+            <div><label data-i18n="city">Місто / провінція</label><input name="Місто" placeholder="Halifax, NS"></div>
+            <div><label data-i18n="bank">Банк для переказу</label>
+              <select name="Банк"><option>RBC</option><option>TD Canada Trust</option><option>Scotiabank</option><option>BMO</option><option>CIBC</option><option>Desjardins</option><option data-i18n="e4">Інше</option></select></div>
+          </div>
+          <label data-i18n="cmt">Коментар</label>
+          <textarea name="Коментар" rows="3" placeholder="..."></textarea>
+          <div class="chk"><input type="checkbox" id="agree"><label for="agree" style="margin:0" data-i18n="agree">Я погоджуюсь на обробку персональних даних згідно із законом PIPEDA та з умовами договору.</label></div>
+          <div class="err" data-e="agree"></div>
+          <p style="margin-top:22px;display:flex;gap:10px">
+            <button type="button" class="btn ghost" onclick="go(2)">←</button>
+            <button class="btn" type="submit" id="sbt" data-i18n="send">Надіслати заявку</button></p>
+        </div>
+        <div class="msg" id="msg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS -->
+<section class="wrap reveal" id="rev">
+  <span class="eyebrow"><span class="dot"></span><span data-i18n="revE">Відгуки</span></span>
+  <h2 data-i18n="revt">Нам довіряють 640 000 клієнтів</h2>
+  <div class="grid3" style="margin-top:32px">
+    <div class="card hov"><div class="rev"><div class="av">ОМ</div><div><b>Олена М.</b><div class="stars">★★★★★</div></div></div>
+      <p class="lead" data-i18n="r1">«Подала заявку ввечері, гроші надійшли на рахунок TD за 12 хвилин. Жодних довідок не просили.»</p></div>
+    <div class="card hov"><div class="rev"><div class="av">ДК</div><div><b>Дмитро К.</b><div class="stars">★★★★★</div></div></div>
+      <p class="lead" data-i18n="r2">«Була прострочка в минулому, інші банки відмовляли. Тут схвалили 300 000 ₴ під адекватний відсоток.»</p></div>
+    <div class="card hov"><div class="rev"><div class="av">ІС</div><div><b>Ірина С.</b><div class="stars">★★★★☆</div></div></div>
+      <p class="lead" data-i18n="r3">«Зрозумілий калькулятор, реальна ставка збіглася з розрахунком. Погасила достроково без комісій.»</p></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="wrap reveal" id="faq">
+  <span class="eyebrow"><span class="dot"></span>FAQ</span>
+  <h2 data-i18n="faqt">Часті запитання</h2>
+  <div style="margin-top:26px;max-width:880px">
+    <details open><summary data-i18n="q1">Які документи потрібні?</summary><p data-i18n="q1a">Лише державне посвідчення особи та банківський рахунок, оформлений на ваше ім'я. Довідка про доходи не потрібна.</p></details>
+    <details><summary data-i18n="q2">Чи можна отримати кредит з поганою кредитною історією?</summary><p data-i18n="q2a">Так. Ми розглядаємо заявки клієнтів із будь-якою кредитною історією, включно з поточними простроченнями до 60 днів.</p></details>
+    <details><summary data-i18n="q3">Як швидко надійдуть гроші?</summary><p data-i18n="q3a">Після схвалення переказ займає від 1 до 15 хвилин, у будь-який час доби, включно з вихідними та святами.</p></details>
+    <details><summary data-i18n="q4">Чи можна погасити достроково?</summary><p data-i18n="q4a">Так, дострокове погашення доступне з першого дня без штрафів, комісій і попереднього повідомлення.</p></details>
+    <details><summary data-i18n="q5">Чи впливає заявка на кредитну історію?</summary><p data-i18n="q5a">Попередній розрахунок і надсилання анкети не впливають на рейтинг. Запит до кредитного бюро робиться лише після вашої згоди.</p></details>
+    <details><summary data-i18n="q6">З якого віку можна оформити кредит?</summary><p data-i18n="q6a">З 19 років до 70 років, за наявності законного статусу проживання в Канаді.</p></details>
+  </div>
+</section>
+
+<section class="wrap reveal"><div class="band">
+  <h2 data-i18n="bt">Гроші потрібні сьогодні?</h2>
+  <p class="lead" style="margin:0 auto 26px;max-width:560px" data-i18n="bs">Заповніть заявку за 2 хвилини та отримайте рішення до кінця цієї сторінки.</p>
+  <a class="btn" href="#form"><span data-i18n="cta">Запросити кредит</span> →</a>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><div class="logo" style="margin-bottom:12px"><i>₴</i><span data-i18n="brand">Швидке Фінансування</span></div>
+      <p style="margin:0;max-width:360px" data-i18n="fdesc">Онлайн-сервіс підбору та видачі кредитів на банківські рахунки на всій території Канади.</p></div>
+    <div><b style="color:var(--txt)" data-i18n="fnav">Розділи</b>
+      <a href="#calc" data-i18n="nav2">Калькулятор</a><a href="#rates" data-i18n="nav6">Тарифи</a>
+      <a href="#rev" data-i18n="nav5">Відгуки</a><a href="#faq" data-i18n="nav3">Питання</a></div>
+    <div><b style="color:var(--txt)" data-i18n="fcont">Контакти</b>
+      <a id="lTel" href="#">— —</a><a id="lMail" href="#">— —</a>
+      <span data-i18n="faddr">Головний офіс: Галіфакс, Нова Шотландія, Канада</span>
+      <span data-i18n="fwork">Пн–Нд, цілодобово</span></div>
+  </div>
+  <p style="border-top:1px solid var(--line);padding-top:18px;margin:0" data-i18n="foot">© 2026 Швидке Фінансування (Financement Rapide). Інформація на сайті не є публічною офертою. Ставка 3% річних. Сума від 5 000 до 100 000 000 ₴, строк від 3 до 60 місяців. Приклад: 150 000 ₴ на 12 міс. під 3% — платіж 12 704 ₴/міс.</p>
+</div></footer>
+
+<div class="sticky"><a class="btn" href="#form"><span data-i18n="cta">Запросити кредит</span> →</a></div>
+
+<div class="ov" id="ov"><div class="card">
+  <div class="tick">✓</div>
+  <h3 id="okT" style="font-size:22px">Заявку надіслано!</h3>
+  <p class="lead" id="okS">Менеджер зв'яжеться з вами протягом 15 хвилин.</p>
+  <p style="margin-top:22px"><button class="btn" onclick="ov.classList.remove('on')" id="okB">Закрити</button></p>
+</div></div>
+
+<script src="script.js?v=3" defer></script>
+</body>
+</html>
